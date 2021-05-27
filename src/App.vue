@@ -6,6 +6,7 @@
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import "./theme/scss/variables.scss";
+import "./theme/scss/common.scss"
 
 export default {
   name: "App"
