@@ -1,5 +1,5 @@
 <template>
-  <button :class="['default', variant]" :disabled="disabled">{{ text }}</button>
+  <button :class="['default', variant]" :disabled="disabled" @click="onClick">{{ text }}</button>
 </template>
 
 <script>
@@ -14,6 +14,12 @@ export default {
       required: true
     },
     disabled: {
+      type: Boolean
+    },
+    onClick: {
+      type: Function
+    },
+    active: {
       type: Boolean
     }
   }
@@ -35,13 +41,18 @@ export default {
   text-transform: capitalize;
   cursor: pointer;
   transition: all 0.4s;
-  &:hover {
-    box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.3);
-  }
   &:disabled {
     background-color: $darkGray;
     color: $orange;
     box-shadow: none;
   }
+}
+.active {
+  background-color: $orange;
+}
+.inactive {
+  background-color: transparent;
+   box-shadow: none;
+   color: $orange;
 }
 </style>

@@ -5,8 +5,12 @@
     <div class="cards_wrapper">
       <ToggleButton />
       <div class="grid__wrapper">
-        <div class="grid_col_1"></div>
-        <div class="grid_col_2"></div>
+        <div class="grid_col_1">
+          <PantherTable />
+        </div>
+        <div class="grid_col_2">
+          <UnlockWallet />
+        </div>
       </div>
     </div>
   </div>
@@ -16,13 +20,17 @@
 import Header from "../components/header.vue";
 import Lottery from "../components/lottery.vue";
 import ToggleButton from "../components/buttons/toggleButton.vue";
+import PantherTable from "../components/cards/pantherTable.vue";
+import UnlockWallet from "../components/cards/unlockWallet.vue";
 
 export default {
   name: "Home",
   components: {
     Header,
     Lottery,
-    ToggleButton
+    ToggleButton,
+    PantherTable,
+    UnlockWallet,
   }
 };
 </script>
@@ -36,10 +44,12 @@ export default {
 .grid__wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 .grid_col_1,
 .grid_col_2 {
-  width: 50%;
+  width: calc(50% - 1rem);
 }
 </style>

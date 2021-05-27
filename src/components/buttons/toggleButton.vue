@@ -1,8 +1,16 @@
 <template>
   <div class="toggler_wrapper">
     <div class="toggle_button_wrapper">
-      <CustomButton text="Next draw" disabled />
-      <CustomButton text="Past draws" />
+      <CustomButton
+        text="Next draw"
+        :variant="active==='Next draw' ? 'active': 'inactive'"
+        :onClick="nextDrawClick"
+      />
+      <CustomButton
+        text="Past draws"
+        :variant="active==='Past draws' ? 'active': 'inactive'"
+        :onClick="nextDrawClick"
+      />
     </div>
   </div>
 </template>
@@ -14,6 +22,20 @@ export default {
   name: "ToggleButton",
   components: {
     CustomButton
+  },
+  data() {
+    return {
+      active: "Next draw"
+    };
+  },
+  methods: {
+    nextDrawClick() {
+      if (this.active === "Next draw") {
+        this.active = "Past draws";
+      } else {
+        this.active = "Next draw";
+      }
+    }
   }
 };
 </script>
