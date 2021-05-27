@@ -1,5 +1,5 @@
 <template>
-  <button :class="['default', variant]">{{ text }}</button>
+  <button :class="['default', variant]" :disabled="disabled">{{ text }}</button>
 </template>
 
 <script>
@@ -7,11 +7,14 @@ export default {
   name: "CustomButton",
   props: {
     variant: {
-      type: String,
+      type: String
     },
     text: {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean
     }
   }
 };
@@ -34,6 +37,11 @@ export default {
   transition: all 0.4s;
   &:hover {
     box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.3);
+  }
+  &:disabled {
+    background-color: $darkGray;
+    color: $orange;
+    box-shadow: none;
   }
 }
 </style>
