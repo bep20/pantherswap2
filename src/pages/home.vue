@@ -8,15 +8,9 @@
       <div :class="mainContentClass">
         <Lottery />
         <div class="cards_wrapper">
-          <ToggleButton />
-          <div class="grid__wrapper">
-            <div class="grid_col_1">
-              <PantherTable />
-            </div>
-            <div class="grid_col_2">
-              <UnlockWallet />
-            </div>
-          </div>
+          <ToggleButton :onToggle="handleToggler" :active="activeSection" />
+          <NextDraw v-if="activeSection==='Next draw'" />
+          <PostDraw v-if="activeSection==='Past draws'" />
         </div>
       </div>
     </div>
@@ -28,8 +22,8 @@ import Header from "../components/header.vue";
 import Sidebar from "../components/sidebar.vue";
 import Lottery from "../components/lottery.vue";
 import ToggleButton from "../components/buttons/toggleButton.vue";
-import PantherTable from "../components/cards/pantherTable.vue";
-import UnlockWallet from "../components/cards/unlockWallet.vue";
+import NextDraw from "../components/nextDraw.vue";
+import PostDraw from "../components/postDraw.vue";
 
 export default {
   name: "Home",
@@ -37,15 +31,16 @@ export default {
     Header,
     Lottery,
     ToggleButton,
-    PantherTable,
-    UnlockWallet,
-    Sidebar
+    Sidebar,
+    NextDraw,
+    PostDraw
   },
   data() {
     return {
       fullSidebar: true,
       sidebarClass: "full_sidebar",
-      mainContentClass: "full_content"
+      mainContentClass: "full_content",
+      activeSection: "Next draw"
     };
   },
   methods: {
@@ -63,6 +58,13 @@ export default {
       } else {
         this.mainContentClass = "full_content";
       }
+    },
+    handleToggler() {
+      if (this.activeSection === "Next draw") {
+        this.activeSection = "Past draws";
+      } else {
+        this.activeSection = "Next draw";
+      }
     }
   }
 };
@@ -73,17 +75,6 @@ export default {
 .cards_wrapper {
   background-color: $blue;
   padding: 2rem;
-}
-.grid__wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-.grid_col_1,
-.grid_col_2 {
-  width: calc(50% - 1rem);
 }
 .content__wrapper {
   display: flex;
