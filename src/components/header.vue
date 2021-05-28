@@ -48,6 +48,7 @@ body {
 .menu_icon {
   font-size: 1.5rem;
   color: $white;
+  cursor: pointer;
 }
 .contact {
   background-color: $orange;
