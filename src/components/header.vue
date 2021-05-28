@@ -39,11 +39,6 @@ export default {
 
 <style lang="scss">
 @import "../theme/scss/variables.scss";
-
-body {
-  font-family: "Mitr", sans-serif;
-}
-
 .header {
   background-color: rgb(18, 24, 39);
   height: 4rem;

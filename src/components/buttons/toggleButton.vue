@@ -4,12 +4,12 @@
       <CustomButton
         text="Next draw"
         :variant="active==='Next draw' ? 'active': 'inactive'"
-        :onClick="nextDrawClick"
+        :onClick="onToggle"
       />
       <CustomButton
         text="Past draws"
         :variant="active==='Past draws' ? 'active': 'inactive'"
-        :onClick="nextDrawClick"
+        :onClick="onToggle"
       />
     </div>
   </div>
@@ -20,30 +20,22 @@ import CustomButton from "../buttons/custombutton.vue";
 
 export default {
   name: "ToggleButton",
+  props: {
+    onToggle: {
+      type: Function
+    },
+    active: {
+      type: String
+    }
+  },
   components: {
     CustomButton
-  },
-  data() {
-    return {
-      active: "Next draw"
-    };
-  },
-  methods: {
-    nextDrawClick() {
-      if (this.active === "Next draw") {
-        this.active = "Past draws";
-      } else {
-        this.active = "Next draw";
-      }
-    }
   }
 };
 </script>
 
 <style scoped lang="scss">
 @import "../../theme/scss/variables.scss";
-.toggler_wrapper {
-}
 .toggle_button_wrapper {
   display: flex;
   align-items: center;
