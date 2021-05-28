@@ -8,3 +8,13 @@
   color: $white;
   padding: 1rem;
 }
+
+div::-webkit-scrollbar{
+  width: 8px;
+  background-color: $darkBlue;
+
+}
+div::-webkit-scrollbar-thumb{
+  background-color: $orange;
+  border-radius: 1rem;
+}

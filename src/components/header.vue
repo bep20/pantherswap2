@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <WalletConnect v-if="showModal" :onClose="handleModal" />
-    <i class="fa fa-bars menu_icon" aria-hidden="true"></i>
+    <div @click="onMenuClick">
+      <i class="fa fa-bars menu_icon" aria-hidden="true"></i>
+    </div>
     <CustomButton text="connect" :onClick="handleModal" />
   </div>
 </template>
@@ -16,6 +18,11 @@ export default {
     CustomButton,
     WalletConnect
   },
+  props: {
+    onMenuClick: {
+      type: Function
+    }
+  },
   data() {
     return {
       showModal: false
@@ -23,7 +30,7 @@ export default {
   },
   methods: {
     handleModal() {
-      console.log("running")
+      console.log("running");
       this.showModal = !this.showModal;
     }
   }
@@ -47,7 +54,7 @@ body {
 }
 .menu_icon {
   font-size: 1.5rem;
-  color: $white;
+  color: $orange;
   cursor: pointer;
 }
 .contact {
