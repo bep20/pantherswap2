@@ -1,16 +1,17 @@
 <template>
   <div>
-    <Header :onMenuClick="handleSidebar" />
     <div class="content__wrapper">
       <div :class="sidebarClass">
-        <Sidebar :full="fullSidebar" />
+        <Sidebar :full="fullSidebar" :onMenuClick="handleSidebar" />
       </div>
       <div :class="mainContentClass">
+        <Header :onMenuClick="handleSidebar" />
         <Lottery />
         <div class="cards_wrapper">
           <ToggleButton :onToggle="handleToggler" :active="activeSection" />
-          <NextDraw v-if="activeSection==='Next draw'" />
-          <PostDraw v-if="activeSection==='Past draws'" />
+          <NextDraw v-if="activeSection===1" />
+          <PostDraw v-if="activeSection===2" />
+          <AdminDraw v-if="activeSection===3" />
         </div>
       </div>
     </div>
@@ -24,6 +25,7 @@ import Lottery from "../components/lottery.vue";
 import ToggleButton from "../components/buttons/toggleButton.vue";
 import NextDraw from "../components/nextDraw.vue";
 import PostDraw from "../components/postDraw.vue";
+import AdminDraw from "../components/adminDraw.vue";
 
 export default {
   name: "Home",
@@ -33,14 +35,15 @@ export default {
     ToggleButton,
     Sidebar,
     NextDraw,
-    PostDraw
+    PostDraw,
+    AdminDraw,
   },
   data() {
     return {
       fullSidebar: true,
-      sidebarClass: "full_sidebar",
-      mainContentClass: "full_content",
-      activeSection: "Next draw"
+      sidebarClass: "half__sidebar",
+      mainContentClass: "half__content",
+      activeSection: "Next draw",
     };
   },
   methods: {
@@ -59,14 +62,10 @@ export default {
         this.mainContentClass = "full_content";
       }
     },
-    handleToggler() {
-      if (this.activeSection === "Next draw") {
-        this.activeSection = "Past draws";
-      } else {
-        this.activeSection = "Next draw";
-      }
-    }
-  }
+    handleToggler(buttonName) {
+      this.activeSection = buttonName;
+    },
+  },
 };
 </script>
 
@@ -78,21 +77,24 @@ export default {
 }
 .content__wrapper {
   display: flex;
-  height: calc(100vh - 4rem);
+  height: calc(100vh);
   overflow-y: hidden;
+  background-color: $darkBlue;
 }
 
 .full_sidebar {
   width: 15rem;
   align-self: stretch;
-  background-color: $darkBlue;
+  background-color: $darkBlue2;
   transition: all 0.4s;
 }
 .half__sidebar {
-  width: 3.5rem;
+  width: 5rem;
   align-self: stretch;
-  background-color: $darkBlue;
+  background-color: $darkBlue2;
   transition: all 0.4s;
+  border-top-right-radius: 2.687rem;
+  border-bottom-right-radius: 2.687rem;
 }
 .full_content {
   width: calc(100% - 15rem);
@@ -100,7 +102,7 @@ export default {
   overflow-y: auto;
 }
 .half__content {
-  width: calc(100% - 3.5rem);
+  width: calc(100% - 5rem);
   transition: all 0.4s;
   overflow-y: auto;
 }

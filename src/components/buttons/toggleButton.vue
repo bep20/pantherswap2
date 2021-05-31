@@ -3,13 +3,18 @@
     <div class="toggle_button_wrapper">
       <CustomButton
         text="Next draw"
-        :variant="active==='Next draw' ? 'active': 'inactive'"
-        :onClick="onToggle"
+        :variant="active===1 ? 'active': 'inactive'"
+        :onClick="()=>onToggle(1)"
       />
       <CustomButton
         text="Past draws"
-        :variant="active==='Past draws' ? 'active': 'inactive'"
-        :onClick="onToggle"
+        :variant="active===2 ? 'active': 'inactive'"
+        :onClick="()=>onToggle(2)"
+      />
+      <CustomButton
+        text="Admin draws"
+        :variant="active===3 ? 'active': 'inactive'"
+        :onClick="()=>onToggle(3)"
       />
     </div>
   </div>
@@ -22,15 +27,15 @@ export default {
   name: "ToggleButton",
   props: {
     onToggle: {
-      type: Function
+      type: Function,
     },
     active: {
-      type: String
-    }
+      type: String,
+    },
   },
   components: {
-    CustomButton
-  }
+    CustomButton,
+  },
 };
 </script>
 
@@ -42,9 +47,8 @@ export default {
   justify-content: center;
   height: 2rem;
   border-radius: 2rem;
-  max-width: 15.75rem;
+  max-width: 23.2rem;
   background-color: $darkGray;
   margin: auto;
-  height: 3.25rem;
 }
 </style>

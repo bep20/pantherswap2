@@ -54,7 +54,7 @@ export default {
   }
 
   & .fa-times {
-    color: $orange;
+    color: $darkPink;
     cursor: pointer;
   }
 }
