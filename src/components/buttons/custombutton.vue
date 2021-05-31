@@ -29,7 +29,7 @@ export default {
 <style scoped lang="scss">
 @import "../../theme/scss/variables.scss";
 .default {
-  background-color: $orange;
+  background-color: $darkPink;
   border-radius: 1rem;
   box-shadow: rgb(14 14 44 / 40%) 0px -1px 0px inset;
   padding: 0.25rem 1rem;
@@ -43,16 +43,16 @@ export default {
   transition: all 0.4s;
   &:disabled {
     background-color: $darkGray;
-    color: $orange;
+    color: $darkPink;
     box-shadow: none;
   }
 }
 .active {
-  background-color: $orange;
+  background-color: $darkPink;
 }
 .inactive {
   background-color: transparent;
    box-shadow: none;
-   color: $orange;
+   color: $darkPink;
 }
 </style>

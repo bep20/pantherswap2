@@ -6,6 +6,7 @@
       <p class="title">Win if 2, 3 or 4 of your ticket numbers match!</p>
     </div>
     <div class="col2">
+      <div class="progress_col2_wrapper">
       <div class="progress_wrapper">
         <div class="inner_wrapper"></div>
       </div>
@@ -14,6 +15,7 @@
         Until ticket sale
       </h2>
       <p class="subTitle">0h, 21m Until lottery draw</p>
+      </div>
     </div>
   </div>
 </template>
@@ -29,22 +31,33 @@ export default {
 .lottery_wrapper {
   background: linear-gradient(
     139.73deg,
-    rgb(31, 96, 111) 0%,
-    rgb(22, 72, 101) 100%
+    #182233 0%,
+    #243E6D 100%
   );
   padding: 3.5rem 4rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  margin: 2rem;
+  border-radius: 1.375rem;
+}
+.progress_col2_wrapper{
+  max-width: 35.75rem;
+  margin-left: auto;
 }
 .col1 {
-  width: 50%;
+  width: calc(50% - 7.687rem/2);
+  box-shadow: 5px 5px 20px #FF0000;
+  background: linear-gradient(to bottom right, #182233,  #243E6D);
+  border-radius: 1.375rem;
+  padding: 2.125rem;
 }
 .col2 {
-  width: 50%;
+   width: calc(50% - 7.687rem/2);
 }
 .heading {
-  color: $orange;
+  color: $darkPink;
   font-size: 1.5rem;
 }
 .title {
@@ -58,7 +71,7 @@ export default {
   height: 1rem;
 }
 .inner_wrapper {
-  background-color: $orange;
+  background-color: $darkPink;
   width: 70%;
   border-radius: 1rem;
   height: 1rem;
@@ -68,7 +81,7 @@ export default {
   color: $white;
   text-align: center;
   & span {
-    color: $orange;
+    color: $darkPink;
   }
 }
 .subTitle {

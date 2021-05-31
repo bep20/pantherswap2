@@ -5,8 +5,8 @@
       <div class="input__container">
         <p class="lotnumer">Select Lottery Number</p>
         <div class="lottery__input">
-          <input type="text" @change="handleSearch" />
-          <CustomButton text="Search" />
+          <input  v-model="numInput" type="number" @change="handleSearch" />
+          <CustomButton v-on:click="handleSearch()" text="Search" />
         </div>
       </div>
 
@@ -22,7 +22,9 @@
           <div class="avatar"></div>
           <div class="info">
             <p>Winning numbers</p>
-            <h2>1, 12, 11, 4</h2>
+            <h2 >
+            <span v-for =" i in winingNumber" :key ="i">{{i+`,`}}&nbsp;</span>
+            </h2>
           </div>
         </div>
         <div class="number__prize__container">
@@ -56,6 +58,8 @@
 <script>
 import CustomButton from "./buttons/custombutton.vue";
 import WalletConnect from "./cards/walletConnect.vue";
+import Web3 from 'web3'
+import Lottery from '../abi/Lottery'
 
 export default {
   name: "PostDraw",
@@ -71,12 +75,35 @@ export default {
         { id: 2, winner: 0, pot: "7,024" },
         { id: 1, winner: 0, pot: "7,024" }
       ],
-      showWallet: false
+      showWallet: false,
+      numInput:0,
+      winingNumber:[]
     };
   },
+
+  beforeCreate: async function(){
+  const testnet=`https://kovan.infura.io/v3/e0737333518f412892d21b1762e8fe47`;
+  const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+  const lottery = "0x8f500cA92F1573c6777dED9aDe3c3e820EDe50C5";
+  const methods = await new web3.eth.Contract(Lottery.abi,lottery).methods;
+  methods.historyNumbers(0,0).call().then(data=>this.winingNumber[0]=data);
+  methods.historyNumbers(0,1).call().then(data=>this.winingNumber[1]=data);
+  methods.historyNumbers(0,2).call().then(data=>this.winingNumber[2]=data);
+  methods.historyNumbers(0,3).call().then(data=>this.winingNumber[3]=data);
+  },
   methods: {
-    handleSearch(e) {
-      console.log(e.target.value);
+  created: async function()
+  {
+  console.log("helo");
+  },
+  
+  handleSearch:  async function()
+    {
+  const testnet=`https://kovan.infura.io/v3/e0737333518f412892d21b1762e8fe47`;
+  const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+ const lottery = "0x8f500cA92F1573c6777dED9aDe3c3e820EDe50C5";
+  const methods = await new web3.eth.Contract(Lottery.abi,lottery).methods;
+  methods.historyNumbers(0,1).call().then(data=>console.log(data));
     },
     handleWallet() {
       this.showWallet = !this.showWallet;
@@ -148,14 +175,14 @@ export default {
     margin-right: 1rem;
   }
   p {
-    color: $orange;
+    color: $darkPink;
   }
 }
 .table_header_xser {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: $orange;
+  color: $darkPink;
   border-top: 1px solid $darkGray;
   padding-top: 1rem;
 }

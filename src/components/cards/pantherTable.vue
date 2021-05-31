@@ -3,7 +3,7 @@
     <div class="card__header">
       <div class="card__avatar"></div>
       <div class="card__info__wrapper">
-        <p>Total Pot</p>
+        <p>Total Pot</p><span>{{totalPot}}</span>
         <h2>PANTHER</h2>
       </div>
     </div>
@@ -21,10 +21,15 @@
 </template>
 
 <script>
+
+import Lottery from '../../abi/Lottery'
+import Web3 from 'web3'
 export default {
   name: "PantherTable",
   data() {
     return {
+
+    totalPot:0,
       table: [
         { id: 4, pot: 2150 },
         { id: 3, pot: 760 },
@@ -32,13 +37,28 @@ export default {
         { id: 1, pot: 100 }
       ]
     };
+  },
+
+  beforeCreate: async function(){
+  const testnet=`https://kovan.infura.io/v3/e0737333518f412892d21b1762e8fe47`;
+  const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
+  const lottery = "0x8f500cA92F1573c6777dED9aDe3c3e820EDe50C5";
+  const methods = await new web3.eth.Contract(Lottery.abi,lottery).methods;
+  methods.totalAmount().call().then(data=>this.totalPot=data);
+
   }
+
+
 };
 </script>
 
 <style scoped lang="scss">
 @import "../../theme/scss/variables.scss";
 .card {
+  box-shadow: 0 3px 6px #000000;
+  background-color: $darkBlue2;
+  border-radius: 1.687rem;
+  padding: 0;
   &__avatar {
     width: 4rem;
     height: 4rem;
@@ -51,12 +71,15 @@ export default {
     align-items: center;
     justify-content: flex-start;
     padding-bottom: 1rem;
+    background-color: $darkBlue3;
     border-bottom: 1px solid $darkGray;
+    border-radius: 1.687rem;
+    padding: 1rem 2rem;
   }
   &__info__wrapper {
     & p {
       font-size: 0.875rem;
-      color: $orange;
+      color: $darkPink;
     }
     & h2 {
       font-size: 1.5rem;
@@ -64,11 +87,12 @@ export default {
     }
   }
   &__body {
+     padding: 1rem 2rem;
     &__item__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: $orange;
+      color: $darkPink;
     }
     &__item__body {
       display: flex;
